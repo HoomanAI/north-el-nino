@@ -1,5 +1,7 @@
 # Why El Niño's North American teleconnection engages late and collapses early (verified code)
 
+[![reproduce](https://github.com/HoomanAI/north-el-nino/actions/workflows/reproduce.yml/badge.svg)](https://github.com/HoomanAI/north-el-nino/actions/workflows/reproduce.yml)
+
 Reproduction package for the manuscript of the same name: a window-resolved
 tendency-budget diagnosis of phase asymmetry in the Pacific–North American (PNA)
 response to El Niño.
@@ -137,5 +139,6 @@ multi-reanalysis ensemble plays in ocean heat-budget studies.
 
 ## License
 
-No license has been chosen yet; see [`LICENSE`](LICENSE). Until the authors add
-one, all rights are reserved.
+The code is released under the [MIT License](LICENSE). The index files in `data/`
+are derived from public NOAA products; please cite the original sources listed
+above when reusing them.
