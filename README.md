@@ -1,144 +1,187 @@
-# Why El Niño's North American teleconnection engages late and collapses early (verified code)
+<p align="center">
+  <img src="assets/banner.svg" alt="North El Niño: reproducible code and data" width="100%">
+</p>
 
-[![reproduce](https://github.com/HoomanAI/north-el-nino/actions/workflows/reproduce.yml/badge.svg)](https://github.com/HoomanAI/north-el-nino/actions/workflows/reproduce.yml)
+<p align="center">
+  <a href="https://github.com/HoomanAI/north-el-nino/actions/workflows/reproduce.yml"><img src="https://github.com/HoomanAI/north-el-nino/actions/workflows/reproduce.yml/badge.svg" alt="reproduce"></a>
+  <img src="https://img.shields.io/badge/python-3.11%20%7C%203.12-1f6f8b?logo=python&logoColor=white" alt="Python 3.11 | 3.12">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0b2e59" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/runtime-about%2025%20s-6c757d" alt="runtime about 25 s">
+  <img src="https://img.shields.io/badge/network-not%20needed-2e8b57" alt="no network needed">
+</p>
 
-Reproduction package for the manuscript of the same name: a window-resolved
-tendency-budget diagnosis of phase asymmetry in the Pacific–North American (PNA)
-response to El Niño.
+<p align="center">
+  <img src="https://img.shields.io/badge/statements%20checked-58-0b2e59" alt="58 statements checked">
+  <img src="https://img.shields.io/badge/match-32-2e8b57" alt="32 match">
+  <img src="https://img.shields.io/badge/corrected-24-e4572e" alt="24 corrected">
+  <img src="https://img.shields.io/badge/unverified%20(external)-2-f0ad4e" alt="2 unverified">
+  <img src="https://img.shields.io/badge/output%20tables%20identical-15%2F15-2e8b57" alt="15 of 15 tables identical">
+</p>
 
-> **Verification copy.** This repository is the authors' original analysis package
-> with **display-only** figure fixes. The data, the method and every number are
-> unchanged. All 15 output tables are byte-identical to those of the original package.
-> Every changed line is marked `# VERIFY (display only)`. See [`VERIFICATION.md`](VERIFICATION.md)
-> for the list of changes and for how the manuscript text was checked against the code outputs.
+This repository holds everything you need to rebuild the figures and numbers of
+the paper *Why El Niño's North American teleconnection engages late and collapses
+early*. The paper asks a simple question: when El Niño warms the tropical Pacific,
+why does its grip on North American weather (the Pacific/North American pattern,
+or PNA) switch on so late in the year, and why does it fade so quickly the
+following spring? It answers that with a tendency budget of the PNA index, viewed
+through integration windows of one to seven months.
 
-Everything in the paper is produced from the thirteen index files in `data/`.
-No network access is needed.
+> [!TIP]
+> **Just want the figures?** Install the requirements and run one command.
+> Everything comes from the thirteen small index files in `data/`, and nothing is downloaded.
+>
+> ```bash
+> pip install -r requirements.txt
+> python run_all.py
+> ```
+
+> [!NOTE]
+> **This is a verified copy.** Every number in the manuscript was checked against
+> what this code actually produces. The data, the method and the results are exactly
+> those of the original package, and all 15 output tables match it byte for byte.
+> The only code changes tidy up how a few figures are drawn (an overlapping label,
+> a clipped bar, a legend sitting on top of the data). Each one is marked
+> `# VERIFY (display only)`, and [`VERIFICATION.md`](VERIFICATION.md) lists them all.
+
+## Getting started
 
 ```bash
 pip install -r requirements.txt
-python run_all.py                         # ~25 s; writes figures/ and outputs/
-python run_all.py fig03                   # one figure only
-python verification/verify_claims.py      # re-check the 58 manuscript statements (after run_all.py)
+python run_all.py                         # all figures and tables, about 25 seconds
+python run_all.py fig03                   # just one figure
+python verification/verify_claims.py      # re-check the 58 statements in the paper
 ```
 
-Figures are written as `figXX_verified.png/.pdf`. Set `ENSO_NA_SUFFIX=` (empty) to
-use the original file names. Output paths can be redirected with the environment
-variables `ENSO_NA_DATA`, `ENSO_NA_FIGDIR` and `ENSO_NA_OUTDIR`.
+Figures land in `figures/` as `figXX_verified.png` and `.pdf`, and every number
+quoted in the paper is written to `outputs/` as a CSV file. If you prefer the
+original file names, set `ENSO_NA_SUFFIX=` (empty). You can also point the input
+and output somewhere else with `ENSO_NA_DATA`, `ENSO_NA_FIGDIR` and `ENSO_NA_OUTDIR`.
 
-## Layout
+Every figure script also runs on its own, for example `python figures/fig04.py`,
+as long as the repository root is on your `PYTHONPATH`. `run_all.py` takes care of that for you.
+
+## What is inside
 
 ```
-data/                     13 index NetCDF files (inputs)
+data/                     the 13 index files (NetCDF) that feed everything
 enso_na/
-  config.py               paths, analysis constants, term labels
-  data.py                 NetCDF loading, monthly homogenisation, filtering
-  events.py               El Niño identification, phases, composites, statistics
-  budget.py               tendency budget, AsyI / AAE / WTI, decompositions
-  plotting.py             shared figure style
-figures/fig01..07.py      main figures  (also write the .csv tables they use)
+  config.py               paths, analysis constants and term labels
+  data.py                 reads the files and puts them all on one monthly axis
+  events.py               finds the El Niño events, builds composites, runs the statistics
+  budget.py               the tendency budget and the AsyI, AAE and WTI diagnostics
+  plotting.py             the shared figure style
+figures/fig01..07.py      main figures (each also writes the CSV tables it uses)
 figures/figS01..05.py     supplementary figures
-run_all.py                regenerates everything
-download_gridded.py       OPTIONAL: gridded North American composite maps (unchanged)
+run_all.py                rebuilds everything in one go
+download_gridded.py       optional extra: gridded maps over North America
 verification/
-  verify_claims.py        checks every quantitative statement in the manuscript
-  verification_checks.csv reference result (58 checks)
-outputs/                  (generated) every number quoted in the paper, as CSV
+  verify_claims.py        checks the manuscript's numbers against the code output
+  verification_checks.csv the reference result for all 58 checks
 ```
 
-Each figure script is standalone: `python figures/fig04.py` works if the package
-root is on `PYTHONPATH` (`run_all.py` handles that automatically).
+## The data
 
-## Data
+The index files come at four different sampling rates (weekly, daily, monthly and
+annual) and use several names for their time axis. `data.py` irons this out and
+turns everything into one table of monthly means. A month only counts if a weekly
+series has at least 2 values in it, or a daily series at least 15; otherwise it is
+left blank.
 
-The supplied files carry four sampling rates (weekly, daily, monthly and annual)
-and several time-axis names; `data.py` converts all of them to a single
-monthly-mean table on a month-start index. Weekly and daily series require at
-least 2 and 15 valid samples per month respectively, otherwise the month is set
-missing.
-
-| File | Variable | Sampling | Record | Public source |
+| File | What it is | Sampling | Record | Where it comes from |
 |---|---|---|---|---|
-| `nino12.nc`, `nino3.nc`, `nino34.nc`, `nino4.nc` | Niño SST anomalies | weekly | 1981-09 → 2026-08 | NOAA CPC weekly ENSO indices (OISSTv2), <https://www.cpc.ncep.noaa.gov/data/indices/wksst8110.for> |
-| `tna.nc` | Tropical North Atlantic | weekly | 1981-09 → 2026-08 | NOAA PSL, <https://psl.noaa.gov/gcos_wgsp/Timeseries/TNA/> |
-| `olren.nc` | equatorial central Pacific OLR anomaly | daily | 1982-01 → 2026-09-04 (usable monthly record ends 2026-08) | NOAA interpolated OLR, <https://psl.noaa.gov/data/gridded/data.olrcdr.interp.html> |
-| `olrln.nc` | annual count of suppressed-convection days | annual | 1982 → 2026 | derived from the same daily OLR record |
-| `pna.nc`, `nao.nc`, `ao.nc` | teleconnection indices | monthly | 1950-01 → 2026-08 | NOAA CPC, <https://www.cpc.ncep.noaa.gov/data/teledoc/telecontents.shtml> |
-| `pdo.nc` | Pacific Decadal Oscillation | monthly | 1854-01 → 2026-07 | NOAA NCEI, <https://www.ncei.noaa.gov/access/monitoring/pdo/> |
-| `soi.nc` | Southern Oscillation Index | monthly | 1951-01 → 2026-07 | NOAA CPC, <https://www.cpc.ncep.noaa.gov/data/indices/soi> |
-| `amo.nc` | Atlantic Multidecadal Oscillation | monthly | 1948-01 → 2023-01 | NOAA PSL, <https://psl.noaa.gov/data/timeseries/AMO/> |
+| `nino12.nc`, `nino3.nc`, `nino34.nc`, `nino4.nc` | Niño SST anomalies | weekly | 1981-09 to 2026-08 | [NOAA CPC weekly ENSO indices (OISSTv2)](https://www.cpc.ncep.noaa.gov/data/indices/wksst8110.for) |
+| `tna.nc` | Tropical North Atlantic index | weekly | 1981-09 to 2026-08 | [NOAA PSL](https://psl.noaa.gov/gcos_wgsp/Timeseries/TNA/) |
+| `olren.nc` | OLR anomaly over the equatorial central Pacific | daily | 1982-01 to 2026-09-04 (usable to 2026-08) | [NOAA interpolated OLR](https://psl.noaa.gov/data/gridded/data.olrcdr.interp.html) |
+| `olrln.nc` | yearly count of suppressed-convection days | annual | 1982 to 2026 | built from the same daily OLR record |
+| `pna.nc`, `nao.nc`, `ao.nc` | teleconnection indices | monthly | 1950-01 to 2026-08 | [NOAA CPC](https://www.cpc.ncep.noaa.gov/data/teledoc/telecontents.shtml) |
+| `pdo.nc` | Pacific Decadal Oscillation | monthly | 1854-01 to 2026-07 | [NOAA NCEI](https://www.ncei.noaa.gov/access/monitoring/pdo/) |
+| `soi.nc` | Southern Oscillation Index | monthly | 1951-01 to 2026-07 | [NOAA CPC](https://www.cpc.ncep.noaa.gov/data/indices/soi) |
+| `amo.nc` | Atlantic Multidecadal Oscillation | monthly | 1948-01 to 2023-01 | [NOAA PSL](https://psl.noaa.gov/data/timeseries/AMO/) |
 
-`olrln.nc` and `amo.nc` are not used in the main budget: the first is an annual
-count and the second stops in January 2023, before the decay year of the
-2023/24 event. `amo.nc` is used only in the extended-record loader.
+Two of these files stay out of the main budget. `olrln.nc` is a yearly count, and
+`amo.nc` stops in January 2023, before the decay year of the 2023/24 event, so it
+is only used when loading the extended record.
 
-### Optional gridded data
+<details>
+<summary><b>Optional: gridded maps over North America</b></summary>
 
-`download_gridded.py` adds North American composite maps of 500 hPa height,
-surface air temperature and precipitation. It downloads roughly 700 MB from
-NOAA PSL and is not needed for any figure in the paper. URLs are listed in the
-module docstring; NOAA PSL occasionally reorganises its directories, so verify
-the current path at <https://psl.noaa.gov/data/gridded/> if a download fails.
+<br>
 
-## Method in brief
+`download_gridded.py` adds composite maps of 500 hPa height, surface air
+temperature and precipitation over North America. It downloads about 700 MB from
+NOAA PSL, and none of the paper's figures need it. The download links are listed
+at the top of the script. NOAA PSL moves its folders around from time to time, so
+if a download fails, look up the current path at <https://psl.noaa.gov/data/gridded/>.
 
-**Events.** El Niño is declared when the DJF mean of the 3-month running-mean
-Niño3.4 anomaly exceeds 0.5 °C. 1986/87 and 2014/15 are excluded because warm
-anomalies persisted into the following event, leaving ten events over
-1982/83–2023/24.
+</details>
 
-**Budget.** The tendency of the standardised PNA index is written as
+## How the analysis works
+
+**Picking the events.** A winter counts as El Niño when the December to February
+mean of the 3-month running Niño3.4 anomaly is above 0.5 °C. The winters of
+1986/87 and 2014/15 are left out, because in both cases the warmth carried
+straight on into the next event. That leaves ten events between 1982/83 and 2023/24.
+
+**The budget.** The month-to-month change of the standardised PNA index is written as
 
 ```
 dP/dt = -λ(t)·P + a_N(t)·N + a_C(t)·C + a_Ṅ(t)·dN/dt + a_D(t)·D
         + a_T(t)·T + a_A(t)·A + a_M(t)·M + a_L(t)·NL + R
 ```
 
-with N = Niño3.4, C = OLR, D = PDO, T = TNA, A = AO, M = NAO and NL a nonlinear
-ENSO term orthogonalised against N. Every coefficient carries an annual harmonic
-and is fitted by ordinary least squares over all months of the record — no
-information about the phase asymmetry enters the fit. All terms have units of
-PNA standard deviations per month.
+Here N is Niño3.4, C is OLR, D is the PDO, T is the TNA index, A is the AO, M is
+the NAO, and NL is a nonlinear ENSO term made independent of N. Each coefficient
+is allowed an annual cycle, and the whole thing is fitted by ordinary least
+squares over every month of the record, so nothing about the asymmetry being
+studied is built into the fit. All terms are in PNA standard deviations per month.
 
-Two choices matter. `dP/dt` is a **forward** difference, because for a
-first-order autoregressive process the centred difference is exactly orthogonal
-to the instantaneous state and cannot identify a damping coefficient. And the
-free methodological parameter is the **integration window** k (1–7 months) over
-which every field is smoothed — the temporal analogue of the mixed-layer
-integration depth in the ocean heat budgets this framework is modelled on.
+Two choices matter most. First, `dP/dt` is a **forward** difference. For a
+first-order autoregressive process a centred difference is exactly uncorrelated
+with the current state, so it could never pick up a damping term. Second, the one
+free setting is the **integration window** k (1 to 7 months) over which every
+field is smoothed. Think of it as the time-domain version of the mixed-layer
+depth used in ocean heat budgets, which this framework borrows from.
 
-**Diagnostics.** AsyI (net contribution over the key development and decay
-periods), AAE (directional consistency, bounded in ±1) and WTI (sensitivity to
-the integration window). The key periods, Aug–Oct of the development year (ASO0)
-and Feb–Apr of the decay year (FMA1), are fixed in `enso_na/config.py`. The
-reference window k = 2 is selected by a documented rule in
-`budget.select_reference_window`, not by hand.
+**Reading the results.** Three diagnostics summarise each term: AsyI (its net
+contribution over the key development and decay periods), AAE (how consistently
+it points one way, between -1 and +1) and WTI (how much it changes with the
+window). The key periods, August to October of the development year (ASO0) and
+February to April of the decay year (FMA1), are fixed in `enso_na/config.py`. The
+reference window of k = 2 comes from a written rule in
+`budget.select_reference_window` rather than being picked by hand.
 
-**Uncertainty.** 95% confidence intervals are Student-t intervals across the ten
-events. Robustness to the ENSO index is assessed with five configurations
-(Niño1+2, Niño3, Niño3.4, Niño4, inverted SOI), which play the role that the
-multi-reanalysis ensemble plays in ocean heat-budget studies.
+**Uncertainty.** The 95% confidence intervals are Student-t intervals across the
+ten events. To see how much the answer depends on the choice of ENSO index,
+everything is repeated with five versions (Niño1+2, Niño3, Niño3.4, Niño4 and the
+inverted SOI). They play the part that a multi-reanalysis ensemble plays in ocean
+heat budget studies.
 
-## Known limitations
+## Things to keep in mind
 
-- Ten events is a small sample. The composite tendency asymmetry is significant
-  (p = 0.001) and holds for 9 of 10 individual events, but per-event speed
-  comparisons are not significant, and several secondary budget terms change
-  sign between ENSO-index configurations.
-- The sign of the *total* tendency asymmetry depends on the phase-integration
-  scheme (Fig. S5). Over a full phase the tendency integral telescopes to the
-  difference between endpoint values, which is dominated by the La Niña-like
-  negative PNA of the early development year. The key-period diagnosis compares
-  two equal-length, seasonally matched windows and does not have this property.
-- The regression budget is statistical. It quantifies which covariates account
-  for the tendency asymmetry; it does not establish causality, and the residual
-  is a substantial term during the decay phase.
-- Two statements in the manuscript cite Song et al. (2026), ref. 15: the "91%"
-  partition and the claim that the same key periods emerge from the oceanic heat
-  budget. They cannot be checked from this code and data and remain unverified.
+> [!IMPORTANT]
+> **Ten events is not many.** The composite tendency asymmetry is significant
+> (p = 0.001) and shows up in 9 of the 10 events, but comparisons of speed for
+> single events are not significant, and several of the smaller budget terms flip
+> sign depending on which ENSO index is used.
+
+- **The integration scheme matters for the total.** The sign of the *total*
+  tendency asymmetry depends on how the phases are integrated (Fig. S5). Over a
+  full phase the tendency adds up to just the difference between the end values,
+  and that is dominated by the La Niña-like negative PNA early in the development
+  year. The key-period comparison uses two windows of equal length at matching
+  times of year, so it avoids this problem.
+- **This is a statistical budget.** It tells you which covariates account for the
+  asymmetry, not what causes it, and the leftover residual is sizeable during decay.
+
+> [!WARNING]
+> **Two statements are still unverified.** The paper cites Song et al. (2026),
+> ref. 15, for two points: that about 91% of the oceanic asymmetry comes from
+> amplitude, and that the same key periods show up in the oceanic heat budget.
+> Neither can be checked with this code and data, and only the abstract of that
+> article could be accessed, so both remain open.
 
 ## License
 
-The code is released under the [MIT License](LICENSE). The index files in `data/`
-are derived from public NOAA products; please cite the original sources listed
-above when reusing them.
+The code is shared under the [MIT License](LICENSE), so feel free to use and adapt
+it. The index files in `data/` are derived from public NOAA products; if you reuse
+them, please cite the original sources listed above.

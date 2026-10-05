@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="North El Niño: reproducible code and data">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0" stop-color="#0b2e59"/>
+      <stop offset="0.55" stop-color="#1f6f8b"/>
+      <stop offset="1" stop-color="#e4572e"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.22"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="300" rx="18" fill="url(#sky)"/>
+  <path d="M0 230 C 150 200, 300 260, 450 228 S 750 196, 900 230 S 1100 262, 1200 226 L1200 300 L0 300 Z" fill="url(#wave)"/>
+  <path d="M0 258 C 200 236, 360 284, 560 254 S 900 230, 1200 262 L1200 300 L0 300 Z" fill="#ffffff" fill-opacity="0.08"/>
+  <circle cx="1080" cy="78" r="38" fill="#ffb347" fill-opacity="0.85"/>
+  <circle cx="1080" cy="78" r="58" fill="#ffb347" fill-opacity="0.15"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" fill="#ffffff">
+    <text x="60" y="108" font-size="56" font-weight="700">North El Niño</text>
+    <text x="60" y="152" font-size="24" fill-opacity="0.92">Why El Niño's North American teleconnection engages late and collapses early</text>
+    <text x="60" y="196" font-size="18" fill-opacity="0.8" letter-spacing="1.5">REPRODUCIBLE CODE AND DATA  ·  VERIFIED AGAINST THE MANUSCRIPT</text>
+  </g>
+</svg>
