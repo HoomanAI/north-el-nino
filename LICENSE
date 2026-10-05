@@ -1,0 +1,9 @@
+No license has been chosen yet.
+
+Copyright (c) 2026 the authors of "Why El Niño's North American teleconnection
+engages late and collapses early". All rights reserved.
+
+Before making this repository public, replace this file with an open license,
+for example MIT or BSD-3-Clause for the code and CC-BY-4.0 for the documentation.
+The index files in data/ are derived from public NOAA products; see README.md
+for their sources and cite those sources when reusing the data.

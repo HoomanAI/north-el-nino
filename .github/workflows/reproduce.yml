@@ -1,0 +1,31 @@
+name: reproduce
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Regenerate all figures and tables
+        run: python run_all.py
+      - name: Re-run the manuscript checks
+        run: |
+          cp verification/verification_checks.csv /tmp/reference.csv
+          python verification/verify_claims.py
+          diff /tmp/reference.csv verification/verification_checks.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: figures-and-tables
+          path: |
+            figures/*.png
+            figures/*.pdf
+            outputs/

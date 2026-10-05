@@ -1,0 +1,59 @@
+id,location,paper_statement,paper_value,computed_value,status,source
+1,Abstract; Results §16,Ten El Niño events 1982/83–2023/24,10 events,"10 events: [1982, 1991, 1994, 1997, 2002, 2006, 2009, 2015, 2018, 2023]",MATCH,fig01_numbers
+2,Results §16,Niño3.4 development / decay speed,"0.22 / 0.28 σ/month, p = 0.033","0.22 / 0.28, p = 0.033",MATCH,fig01_numbers
+3,Results §16,Development / decay durations,10.4 / 10.3 months,10.4 / 10.3,MATCH,fig01_numbers
+4,Results §17,Niño3.4 rises steadily from March of the development year,rises from Mar0,composite −0.11 (Mar0) → +0.16 (Apr0) → +1.00 (Aug0),MATCH,recomputed composite
+5,Results §17,Niño3.4 in ASO0; PNA in ASO0,1.25 σ; 0.05 σ,1.25; 0.05,MATCH,fig01_numbers
+6,Results §17,PNA ASO0 statistically indistinguishable from zero,not significant,t-test across events p = 0.82,MATCH,audit v1.py
+7,Results §17,PNA maximum and month; PNA in FMA1; Niño3.4 in FMA1,0.76 σ in January; 0.41 σ; 1.07 σ,0.76 in Jan1; 0.41; 1.07,MATCH,fig01_numbers
+8,Results §17,Response eight times larger; forcing 15% smaller,8×; 15%,8.3×; 15%,MATCH,fig01_numbers
+9,Results §18,"Significant months: Aug and Sep (dev), Mar and Apr (decay); this identifies ASO0 and FMA1",4 months; ASO0 and FMA1 identified,"12 months significant: Jan0, Feb0, Jun0, Aug0, Sep0, Nov0, Jan1, Mar1, Apr1, Jun1, Oct1, Nov1; Oct0 and Feb1 (inside key periods) p = 0.33",MISMATCH,recomputed point-symmetric test
+10,Results §18,Same key periods emerge from the oceanic heat budget (ref. 15),—,external reference; not checkable from code/data,NOT VERIFIABLE,external
+11,Results §20,"Reference window two months, selected by the rule (Fig. 6b)",k = 2,rule in budget.select_reference_window returns k = 2,MATCH,fig06_window_selection
+12,Results §20,Budget explains 27% of variance; annual damping rate; persistence,27%; 0.30/month; ~3 months,27%; 0.3; 3.3 months,MATCH,fig04_numbers
+13,Results §20,Tendency positive through the late development year and strongly negative from January to April,positive late dev year; strongly negative Jan–Apr,"Aug0 -0.13, Sep0 -0.15, Oct0 +0.17, Nov0 +0.54, Dec0 +0.14; Jan1 -0.18, Feb1 -0.05, Mar1 -0.41, Apr1 -0.47",MISMATCH,recomputed composite tendency
+14,Results §21; Abstract,Tendency key-period integrals and AsyI,"−0.11 / −0.93; −1.04 ± 0.50, p = 0.001; 9/10 negative","-0.11 / -0.93; -1.04 ± 0.5, p = 0.001; 9/10",MATCH,"fig03, fig06, figS01, fig07"
+15,Results §22,Closure mismatch smallest at the two-month window (Fig. 3a),smallest at k = 2,"mismatch k1–7: 0.53, 0.52, 0.61, 0.76, 1.24, 0.14, 0.22; smallest at k = 6 (k = 2 smallest only among admissible windows)",MISMATCH,fig06_window_selection
+16,Results §22,Damping AsyI and AAE,−0.26 σ; −1.00,-0.26; -1.0,MATCH,fig03
+17,Results §22; Abstract,Damping is the clearest/leading decay-favouring term; leading negative term under every scheme (Fig. S5a),damping leading under every scheme,"key scheme: damping -0.26 vs ENSO tendency -0.46 and residual -0.53; damping is leading only in the 9-month schemes (-1.14, -0.78)",MISMATCH,"figS05_schemes, fig03"
+18,Results §22,"Other term AsyI values and AAE (dN/dt, TNA, NAO, PDO; Niño SST)","−0.46, −0.17, −0.17, −0.15 (AAE −1); +0.57 (AAE +1)","-0.46, -0.17, -0.17, -0.15; 0.57",MATCH,fig03
+19,Results §22,Tropical Pacific SST forcing is the only substantial positive contribution,only positive term,nonlinear ENSO term also positive: 0.14 (comparable to PDO -0.15),MISMATCH,fig03
+20,Results §22,"Residual AsyI, almost entirely decay phase",−0.53,"-0.53 (dev 0.05, dec -0.58)",MATCH,fig03
+21,Results §23,Damping AsyI range across 5 configurations; signs of PDO/TNA/NAO unchanged,−0.26 to −0.33,-0.26 to -0.33,MATCH,fig03
+22,Results §23,Only dN/dt and convective term change sign between configurations,2 terms change sign,"dN/dt, convective AND nonlinear term change sign (NL: +0.14, +0.09, +0.05, -0.07, +0.07)",MISMATCH,fig03
+23,Results §23,AsyI across five event definitions; extremes removed,−0.83 to −1.16; −1.04 → −0.88,-0.83 to -1.16; −0.88 (log),MATCH,"figS01, run log"
+24,Results §25,Tropical forcing builds the teleconnection in both phases,positive in both phases,"grouped tropical forcing ASO0 +0.01, FMA1 +0.21",MISMATCH,recomputed grouped integrals
+25,Results §25,Phase regressions slope / r / p,"0.29, 0.37; r 0.30, 0.38; p 0.41, 0.28","0.29, 0.37; 0.3, 0.38; 0.41, 0.27",MATCH,fig04_numbers
+26,Results §26; Abstract; Discussion,Amplitude / seasonal / residual components,+0.03 / −0.63 / +0.10,+0.03 / -0.63 / +0.10 (budget total -0.50),MATCH,fig04_numbers
+27,Abstract,Essentially all of the asymmetry (−0.63 σ) arises from seasonal modulation,of 'the asymmetry',"the partition is of the budget total (-0.50), not of the tendency asymmetry (-1.04)",MISMATCH,fig04_numbers
+28,Results §27; Discussion,91% amplitude partition in Song et al. (ref. 15),91%,external reference; not checkable from code/data,NOT VERIFIABLE,external
+29,Results §28,"Term partitions: damping, Niño SST, dN/dt, NAO, TNA",−0.42/+0.16; +0.56/0.00; −0.50; −0.17; −0.12,-0.42/0.16; 0.56/-0.0; -0.5; -0.17; -0.12,MATCH,fig04_decomposition
+30,Results §30,"Tropical link significant every month, r −0.56 to −0.69; slope ASO / FMA",−0.45 / −0.85,all p < 0.001; r -0.56 to -0.69; -0.45 / -0.85,MATCH,fig05
+31,Results §31,"Extratropical link significant Dec–May, −0.37 in March, zero Jul–Nov, positive Aug–Sep",as stated,"p<0.05 months: [1, 2, 3, 4, 5, 12]; Mar -0.37; Aug/Sep +0.09/+0.08",MATCH,fig05
+32,Results §31,Net gain significant only Dec–Mar (r 0.40–0.59); gain ASO / FMA,−0.03 / +0.27,"p<0.05 months: [1, 2, 3, 12]; -0.03 / +0.27",MATCH,fig05
+33,Abstract,Circulation response to a convective anomaly reverses sign,reverses sign,"ASO slopes +0.09, +0.08, +0.02 (p = 0.64, 0.66, 0.89); body text (§31) says 'statistically zero' — abstract and body inconsistent",MISMATCH,fig05
+34,Results §33,"Damping rate largest in ASO, smallest in February–March",0.45 ASO; 0.14 Feb–Mar,"ASO 0.45; Feb 0.18, Mar 0.14, Apr 0.15 → smallest Mar–Apr",MISMATCH,figS04_seasonal_coefficients
+35,Results §35,WTI tendency dev/dec; damping dec/dev; residual dec,+0.46/+1.27; +0.75/−0.07; +0.90,0.46/1.27; 0.75/-0.07; 0.9,MATCH,fig03
+36,Results §35,Development-phase integrals are almost flat across windows,almost flat,"WTI_dev tendency 0.46, a_N·N 0.41, dN/dt 0.34 (decay tendency 1.27)",MISMATCH,fig03
+37,Results §36,"AsyI at k = 1, 2, 3 (all significant)","−1.33, −1.04, −0.94","-1.33 (p 0.014), -1.04 (p 0.001), -0.94 (p 0.002)",MATCH,fig06
+38,Results §36; Discussion §47,Not significant at 5 and 6; reverses sign to +0.29 at 7 / 'stable up to four months and reverses at seven',first reversal at k = 7,"k4: -0.406 (p 0.016), k5: -0.086 (p 0.529), k6: +0.136 (p 0.155), k7: +0.294 (p 0.005); sign first reverses at k = 6",MISMATCH,fig06
+39,Results §37,Seasonal coefficients raise explained variance by 8 points at k = 2 and up to 18 points,8; 18,8; 18,MATCH,fig06
+40,Results §38,Damping under 9-month schemes; total tendency sign,−1.14 / −0.78; about +1,-1.14 / -0.78; 1.0 / 1.13,MATCH,figS05
+41,Results §40,Event AsyI range; correlation with amplitude,"−1.90 (2009) to +0.10 (1994); r −0.59, p 0.07","-1.90 (2009) to +0.10 (1994); r −0.59, p 0.072 (log)",MATCH,"fig07, run log"
+42,Results §41,"Strong group: peak ~0.9, falls to −0.6 by April",−0.6 by April,"peak 0.94; Apr1 +0.11, May1 -0.61 → −0.6 is reached in May",MISMATCH,recomputed group composites
+43,Results §41,Groups differ by ~0.7 σ in Niño3.4 but follow similar decay trajectories,similar decay,Dec0 2.24 vs 1.54; reach zero at Jun1 vs Jul1; decay 0.37 vs 0.22 σ/month → strong group decays faster,MISMATCH,recomputed group composites
+44,Results §42,"Extended record: −0.52 σ, 17 events, p = 0.063, damping again leading negative term",damping leading,"-0.52, 17 events, p 0.063; damping -0.24 vs residual -0.43 → leading only among budget terms",MISMATCH,"figS02, run log"
+45,Discussion §46,Residual comparable in size to the damping contribution,comparable,residual -0.53 vs damping -0.26 (≈2.0×); decay phase -0.58 vs -0.2,MISMATCH,fig03
+46,Methods §50,"Thirteen monthly, weekly and daily files",3 sampling types,olrln.nc is annual (4 sampling types),MISMATCH,data files
+47,Methods §50,Daily OLR covers January 1982 to September 2026,to Sep 2026,last daily value 2026-08-20,MISMATCH,olren.nc
+48,Methods §50,Other record spans (weekly Sep 1981–Aug 2026; PNA/NAO/AO 1950–Aug 2026; PDO 1854–Jul 2026; SOI 1951–Jul 2026),as stated,matches figS03_coverage,MATCH,figS03_coverage
+49,Methods §53,"Event rule, exclusions and event list","DJF > 0.5; 1986, 2014 excluded; 10 events","code: events.py; [1982, 1991, 1994, 1997, 2002, 2006, 2009, 2015, 2018, 2023]",MATCH,events.py
+50,Methods §54,Key periods are identified from months that differ significantly,derived from test,"hard-coded in config.py (KEY_DEV_MONTHS = (7, 8, 9), KEY_DEC_MONTHS = (13, 14, 15)); Oct0/Feb1 not significant",MISMATCH,config.py
+51,Methods §62,"Reference-window rule (k ≤ 6, significant, minimum mismatch)",as stated,matches budget.select_reference_window,MATCH,budget.py
+52,Methods §64,Scheme (ii) centred on each event's mature phase; (iii) amplitude-aligned,event-specific,code uses a fixed Dec0 for every event (peak_months=None); scheme (iii) is a fixed 9/7-month split,MISMATCH,budget.py
+53,"Methods §61, §66, §69",Forward difference; harmonics; AsyI/AAE/WTI and decomposition formulas,as stated,match budget.py,MATCH,budget.py
+54,Fig. 2 caption,Phase integrals 'averaged over' ASO0 / FMA1,averages,integrate_terms sums 3 months,MISMATCH,budget.py
+55,Fig. 3 / text §35,WTI of tendency and residual quoted in text,shown in Fig. 3d,Fig. 3d plots budget terms only; tendency and residual WTI are quoted in the text but not plotted,MISMATCH,fig03.py
+56,Fig. 3c caption,Open symbols show the four alternative configurations,identifiable,no legend identifying which marker is which configuration,MISMATCH,fig03.py
+57,Fig. 2b,Key-period bars for windows 1–7 months,all values visible,k = 1 tendency (−1.33) and damping (−1.20) bars clipped by ylim ±1.25,MISMATCH,fig02.py
+58,Code availability,Run time under a minute; requirements,<1 min,~30 s; requirements as stated,MATCH,run_all.py
