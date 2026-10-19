@@ -4,8 +4,9 @@ Regenerate every figure and every table of the paper.
 
 Usage
 -----
-    python run_all.py                  # all main and supplementary figures
-    python run_all.py fig01 fig05      # selected figures only
+    python run_all.py                  # all figures and tables
+    python run_all.py fig01 fig05      # selected items only
+    python verify_numbers.py           # assert the published values
 
 Environment
 -----------
@@ -23,8 +24,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "figures"))
+sys.path.insert(0, str(ROOT / "tables"))
 
-ALL = [f"fig{i:02d}" for i in range(1, 8)] + [f"figS{i:02d}" for i in range(1, 6)]
+ALL = ([f"fig{i:02d}" for i in range(1, 8)]
+       + [f"figS{i:02d}" for i in range(1, 6)]
+       + ["table07_interaction"])
 
 
 def main(names):

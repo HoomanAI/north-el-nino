@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "Seasonal gating or forcing amplitude? Quantifying El Nino-North American teleconnection asymmetry"
+authors:
+  - family-names: Razavi
+    given-names: Hooman
+    affiliation: "Department of Civil Engineering, University of Ottawa"
+  - family-names: Bonakdari
+    given-names: Hossein
+    affiliation: "Department of Civil Engineering, University of Ottawa"
+    email: hbonakda@uottawa.ca
+license: MIT
+repository-code: "https://github.com/<user>/north-el-nino"
