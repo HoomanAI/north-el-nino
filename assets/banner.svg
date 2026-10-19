@@ -1,23 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="North El Niño: reproducible code and data">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300"
+     font-family="Liberation Sans, Helvetica, Arial, sans-serif">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="1" y2="0.35">
-      <stop offset="0" stop-color="#0b2e59"/>
-      <stop offset="0.55" stop-color="#1f6f8b"/>
-      <stop offset="1" stop-color="#e4572e"/>
+      <stop offset="0%"   stop-color="#0b2a44"/>
+      <stop offset="28%"  stop-color="#14506b"/>
+      <stop offset="52%"  stop-color="#2d7f86"/>
+      <stop offset="74%"  stop-color="#b8532f"/>
+      <stop offset="100%" stop-color="#d2552c"/>
     </linearGradient>
-    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0.05"/>
-      <stop offset="1" stop-color="#ffffff" stop-opacity="0.22"/>
-    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%"   stop-color="#ffc766" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffc766" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="round"><rect width="1200" height="300" rx="14"/></clipPath>
   </defs>
-  <rect width="1200" height="300" rx="18" fill="url(#sky)"/>
-  <path d="M0 230 C 150 200, 300 260, 450 228 S 750 196, 900 230 S 1100 262, 1200 226 L1200 300 L0 300 Z" fill="url(#wave)"/>
-  <path d="M0 258 C 200 236, 360 284, 560 254 S 900 230, 1200 262 L1200 300 L0 300 Z" fill="#ffffff" fill-opacity="0.08"/>
-  <circle cx="1080" cy="78" r="38" fill="#ffb347" fill-opacity="0.85"/>
-  <circle cx="1080" cy="78" r="58" fill="#ffb347" fill-opacity="0.15"/>
-  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" fill="#ffffff">
-    <text x="60" y="108" font-size="56" font-weight="700">North El Niño</text>
-    <text x="60" y="152" font-size="24" fill-opacity="0.92">Why El Niño's North American teleconnection engages late and collapses early</text>
-    <text x="60" y="196" font-size="18" fill-opacity="0.8" letter-spacing="1.5">REPRODUCIBLE CODE AND DATA  ·  VERIFIED AGAINST THE MANUSCRIPT</text>
+
+  <g clip-path="url(#round)">
+    <rect width="1200" height="300" fill="url(#sky)"/>
+
+    <!-- sun -->
+    <circle cx="1035" cy="92" r="104" fill="url(#glow)"/>
+    <circle cx="1035" cy="92" r="42"  fill="#f2b03f"/>
+
+    <!-- ocean swells -->
+    <path d="M0 232 C 170 206, 330 258, 520 236 C 700 215, 860 254, 1050 232
+             C 1120 224, 1170 230, 1200 227 L1200 300 L0 300 Z"
+          fill="#0d3350" opacity="0.42"/>
+    <path d="M0 256 C 190 232, 350 280, 560 258 C 760 238, 930 274, 1110 254
+             C 1155 249, 1180 252, 1200 251 L1200 300 L0 300 Z"
+          fill="#0a2740" opacity="0.55"/>
+
+    <!-- type -->
+    <text x="64" y="128" font-size="58" font-weight="bold" fill="#ffffff"
+          letter-spacing="-0.5">North El Niño</text>
+    <text x="66" y="172" font-size="21" fill="#ffffff" opacity="0.94">
+      Seasonal gating or forcing amplitude? Quantifying El Niño–North American teleconnection asymmetry
+    </text>
+    <text x="66" y="206" font-size="12.5" fill="#ffffff" opacity="0.70"
+          letter-spacing="2.4">REPRODUCIBLE CODE AND DATA · 16/16 PUBLISHED VALUES RECOMPUTED</text>
   </g>
 </svg>
