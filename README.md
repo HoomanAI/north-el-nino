@@ -22,7 +22,7 @@ development–decay asymmetry that follows from forcing *amplitude* from the par
 that follows from seasonally varying atmospheric *coupling*.
 
 Everything in the paper is reproduced from the thirteen monthly index files in
-`data/`. 
+`data/`. No gridded fields, no downloads, no network access.
 
 ## Analysis domains
 
