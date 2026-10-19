@@ -46,20 +46,15 @@ def panel_label(ax, text, dx=-0.10, dy=1.06):
             fontsize=9, va="bottom", ha="left")
 
 
-VERIFY_NOTE = ("Verification copy: data and analysis unchanged from the original package; "
-               "display fixes only (see Verification_Changes.xlsx).")
-
-
 def save(fig, name):
-    import os
-    suffix = os.environ.get("ENSO_NA_SUFFIX", "_verified")
-    if suffix:
-        fig.text(0.5, -0.01, VERIFY_NOTE, ha="center", va="top", fontsize=5.5, color="0.35",
-                 style="italic", transform=fig.transFigure)
-    name = name + suffix
-    path = FIG_DIR / f"{name}.png"
-    fig.savefig(path, dpi=FIG_DPI)
+    """Write a figure as PNG and PDF.
+
+    The PDF is vector and is what should be submitted to the journal; the PNG
+    is for quick inspection. FIG_DPI only affects the PNG.
+    """
+    png = FIG_DIR / f"{name}.png"
+    fig.savefig(png, dpi=FIG_DPI)
     fig.savefig(FIG_DIR / f"{name}.pdf")
     plt.close(fig)
-    print(f"  wrote {path}")
-    return path
+    print(f"  wrote {png}")
+    return png
